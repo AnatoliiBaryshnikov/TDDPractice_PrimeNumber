@@ -1,0 +1,85 @@
+#include "PrimeNumber.Core/PrimeNumberCalculator.h"
+
+PrimeNumberCalculator::PrimeNumberCalculator() = default;
+
+std::vector<size_t> PrimeNumberCalculator::GetPrimeNumbers(size_t i_till_value)
+  {
+  std::vector<size_t> prime_numbers{ /*2, 3, 5, 7, 11, 13*/ };
+
+  //std::vector<size_t> natural_numbers{ /*2, 3, 5, 7, 11, 13*/ };
+  //natural_numbers.reserve(i_till_value);
+  //for (size_t i = 0; i <= i_till_value; i++)
+  //  {
+  //  natural_numbers.push_back(i);
+  //  }
+  //natural_numbers[1] = 0;
+
+  //auto opt_outer_iteration_count = static_cast<size_t>( std::sqrt(natural_numbers.size())+1 );
+  //size_t inner_iteration_count = natural_numbers.size();
+  //for (size_t i = 2; i < /*natural_numbers.size()*/ opt_outer_iteration_count; i++)
+  //  {
+  //  if (natural_numbers[i] == 0)
+  //    {
+  //    continue;
+  //    }
+
+  //  for (size_t j = /*i+1*/ i*i; j < inner_iteration_count; j++)
+  //    {
+  //    if (/*natural_numbers[i] != 0 && */ natural_numbers[j] % natural_numbers[i] == 0)
+  //      {
+  //      natural_numbers[j] = 0;
+  //      }
+  //    }
+  //  }
+  //
+  //for (size_t i = 0; i < natural_numbers.size(); i++)
+  //  {
+  //  if (natural_numbers[i] != 0)
+  //    {
+  //    prime_numbers.push_back(natural_numbers[i]);
+  //    }
+  //  }
+
+  std::vector<int8_t> natural_numbers(i_till_value+1, 1);
+
+  natural_numbers[0] = 0;
+  natural_numbers[1] = 0;
+
+  auto opt_outer_iteration_count = static_cast<size_t>(std::sqrt(natural_numbers.size()) + 1);
+  size_t inner_iteration_count = natural_numbers.size();
+  for (size_t i = 2; i < opt_outer_iteration_count; i++)
+    {
+    if (natural_numbers[i] == 0)
+      {
+      continue;
+      }
+
+    //for (size_t j = i * i; j < inner_iteration_count; j++)
+    //  {
+    //  if (j % i == 0)
+    //    {
+    //    natural_numbers[j] = 0;
+    //    }
+    //  }
+
+    size_t j = i * i;
+    while (j < inner_iteration_count)
+      {
+      natural_numbers[j] = 0;
+      j += i;
+      }
+
+    }
+
+
+
+  for (size_t i = 0; i < natural_numbers.size(); i++)
+    {
+    if (natural_numbers[i] != 0)
+      {
+      prime_numbers.push_back(i);
+      }
+    }
+
+  return prime_numbers;
+  }
